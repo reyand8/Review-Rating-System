@@ -19,6 +19,7 @@ const theme = createTheme({
             light: '#d4bcf3',
             contrastText: '#ffffff',
             messageText: '#969595',
+            reviewBg: '#cecbcb'
         },
         secondary: {
             main: '#9c27b0',
