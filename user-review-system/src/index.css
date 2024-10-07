@@ -1,0 +1,32 @@
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: #d4bcf3;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(0,0,0,0.87);
+}
+
+.icon {
+    width: 44px;
+}
+
+.box::-webkit-scrollbar {
+    display: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 24px;
+}
