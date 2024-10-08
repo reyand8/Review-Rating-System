@@ -1,6 +1,6 @@
 {
   "name": "user-review-system",
-  "homepage": "https://reyand8.github.io/Review-Rating-System/",
+  "homepage": "https://reyand8.github.io/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -30,6 +30,7 @@
     "lint": "eslint -c .eslintrc --ext .jsx,.js ./src/",
     "lint:fix": "npm run lint -- --fix",
     "eject": "react-scripts eject",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
