@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Review-Rating-System/static/css/main.48892a80.css",
+    "main.js": "/Review-Rating-System/static/js/main.f6ad9c33.js",
+    "static/media/home_icon.png": "/Review-Rating-System/static/media/home_icon.4e75c3d2c7a6b7efd072.png",
+    "index.html": "/Review-Rating-System/index.html",
+    "main.48892a80.css.map": "/Review-Rating-System/static/css/main.48892a80.css.map",
+    "main.f6ad9c33.js.map": "/Review-Rating-System/static/js/main.f6ad9c33.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.48892a80.css",
+    "static/js/main.f6ad9c33.js"
+  ]
+}
