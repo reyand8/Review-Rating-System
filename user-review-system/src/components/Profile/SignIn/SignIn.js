@@ -9,7 +9,6 @@ import {styled} from '@mui/material/styles';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import {validateSignIn, isValid} from '../../../utils/validation';
 
-const btnstyle={margin:'8px 0'};
 
 const TextFieldBox = styled(Box)(({ theme }) => ({
     [theme.breakpoints.up('xs')]: {
@@ -31,18 +30,18 @@ const SignIn = ({formState, setFormState, handlerChange, setLogin, setAuth}) => 
 
     const handleFirebaseError = (error) => {
         const errorCode = error.code;
-        console.log(error)
-        console.log(errorCode)
         switch (errorCode) {
             case 'auth/wrong-password':
                 setFirebaseError('Invalid email or password');
+                break;
+            case 'auth/user-not-found':
+                setFirebaseError('User not found');
                 break;
             default:
                 setFirebaseError('An unexpected error occurred');
                 break;
         }
     };
-
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -54,11 +53,7 @@ const SignIn = ({formState, setFormState, handlerChange, setLogin, setAuth}) => 
             try {
                 await signInWithEmailAndPassword(auth, formState.email, formState.password);
                 setAuth(true)
-                setFormState({
-                    username: '',
-                    email: '',
-                    password: ''
-                });
+                setFormState({username: '', email: '', password: ''});
             } catch (error) {
                 handleFirebaseError(error);
             }
@@ -101,8 +96,8 @@ const SignIn = ({formState, setFormState, handlerChange, setLogin, setAuth}) => 
                     type="submit"
                     color="primary"
                     variant="contained"
-                    style={btnstyle}
-                    fullWidth>
+                    fullWidth
+                    sx={{margin:'8px 0'}}>
                     <Typography>Sign in</Typography>
                 </Button>
                 {firebaseError && (
@@ -116,7 +111,6 @@ const SignIn = ({formState, setFormState, handlerChange, setLogin, setAuth}) => 
                             <Typography>Forgot password</Typography>
                         </Link>
                     </Box>
-
                     <Button sx={{ml: 2}} onClick={() => setLogin(prev => !prev)}>
                         <Typography>Sign up</Typography>
                     </Button>
