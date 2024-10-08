@@ -8,7 +8,6 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
 import { validateSignUp, isValid } from '../../../utils/validation';
 
-const btnstyle = { margin: '8px 0' };
 
 const TextFieldBox = styled(Box)(({ theme }) => ({
     [theme.breakpoints.up('xs')]: {
@@ -38,6 +37,10 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
             case 'auth/weak-password':
                 setErrors((prev) =>
                     ({ ...prev, password: 'Password should be at least 6 characters' }));
+                break;
+            case 'auth/email-already-in-use':
+                setErrors((prev) =>
+                    ({ ...prev, email: 'Email is already in use' }));
                 break;
             default:
                 setFirebaseError('An unexpected error occurred');
@@ -70,7 +73,8 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
                 const userCredential =
                     await createUserWithEmailAndPassword(auth, formState.email, formState.password);
                 const user = userCredential.user;
-                saveUserInfo(user.uid, formState.username, formState.email, formState.role);
+                const role = formState.role || 'user';
+                saveUserInfo(user.uid, formState.username, formState.email, role);
                 setLogin(true);
                 setFormState({
                     username: '',
@@ -134,8 +138,8 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
                     color="primary"
                     name="Sign Up"
                     variant="contained"
-                    style={btnstyle}
                     fullWidth
+                    sx={{margin: '8px 0'}}
                 >
                     <Typography>Sign up</Typography>
                 </Button>
