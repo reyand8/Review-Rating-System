@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
 import {AppBar, Box, Button, Toolbar} from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -14,24 +13,27 @@ const StyledHomeImg = styled('img')({
     margin: '10px 0',
 });
 
+const StyledAccountIcon = styled(AccountCircleIcon)(({ theme }) => ({
+    color: theme.palette.primary.contrastText,
+    width: '38px',
+    height: '38px',
+}));
+
 const Header = () => {
     return (
             <>
                 <Box sx={{ flexGrow:1 }}>
                     <AppBar position="static">
                         <Toolbar sx={{display:"flex", justifyContent: "space-between"}}>
-                            <Link component={RouterLink} to="/" sx={{ flexGrow: 1 }}>
+                            <RouterLink component={RouterLink} to="/" sx={{ flexGrow: 1 }}>
                                 <StyledHomeImg src={homeImage}/>
-                            </Link>
+                            </RouterLink>
                             <Box>
                                 <Button component={RouterLink}
                                         to="profile"
                                         size="large"
-                                        startIcon={
-                                            <AccountCircleIcon sx={{
-                                                color: theme.palette.primary.contrastText,
-                                                width: '38px', height: '38px'
-                                            }}/>}>
+                                        startIcon={<StyledAccountIcon/>}
+                                >
                                 </Button>
                             </Box>
                         </Toolbar>
