@@ -7,7 +7,7 @@ import Home from '../components/Home/Home';
 
 
 const AppRoutes = () => (
-    <Routes basename="/Review-Rating-System">
+    <Routes>
         <Route index element={<Home />} />
         <Route path={ROUTES.PROFILE} element={<Profile />} />
         <Route path="*" element={<NotFound />} />
