@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Grid2, Typography } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
+import { Box, Grid2, Typography } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 
-import SignUp from "./SignUp/SignUp";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import SignIn from "./SignIn/SignIn";
+import SignUp from './SignUp/SignUp';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
+import SignIn from './SignIn/SignIn';
 import { authListener } from '../../features/userSlice/userSlice';
 
 const paperStyle = { padding: 20, minHeight: '36vh', maxWidth: 360, margin: '60px auto' };

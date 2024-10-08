@@ -1,0 +1,15 @@
+{
+  "parser": "@babel/eslint-parser",
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ],
+  "rules": {
+    "indent": ["off", 4],
+    "quotes": ["error", "single"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "max-len": ["off", {"code": 120}],
+    "comma-dangle": ["error", "always-multiline"],
+    "semi": ["error", "always"]
+  }
+}

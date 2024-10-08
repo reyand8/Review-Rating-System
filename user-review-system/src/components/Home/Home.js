@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Grid2 } from '@mui/material';
-import Review from "../Review/Review";
-import AllReviews from "../AllReviews/AllReviews";
-import EmptySection from "../Status/EmptySection";
+import Review from '../Review/Review';
+import AllReviews from '../AllReviews/AllReviews';
+import EmptySection from '../Status/EmptySection';
 import { useDispatch, useSelector } from 'react-redux';
 import { authListener, fetchAllUsers } from '../../features/userSlice/userSlice';
 

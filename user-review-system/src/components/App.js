@@ -1,9 +1,9 @@
 import React from 'react';
-import {Box, Container, ThemeProvider} from "@mui/material";
+import {Box, Container, ThemeProvider} from '@mui/material';
 
-import Header from "./Header/Header";
+import Header from './Header/Header';
 import theme from '../assets/theme';
-import AppRoutes from "../routes/AppRoutes";
+import AppRoutes from '../routes/AppRoutes';
 
 
 const App = () => {

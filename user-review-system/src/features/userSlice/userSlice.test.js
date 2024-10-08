@@ -58,7 +58,7 @@ describe('userSlice', () => {
     });
 
     it('should set user data', () => {
-        const userData = { name: 'Anna Anna', age: 30, 'isAuthenticated': true, 'userId': "123", };
+        const userData = { name: 'Anna Anna', age: 30, 'isAuthenticated': true, 'userId': '123' };
         const action = setUserData(userData);
         const state = userReducer(initialState, action);
         expect(state.userData).toEqual(userData);

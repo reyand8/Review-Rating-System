@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getDatabase, ref, get } from "firebase/database";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, ref, get } from 'firebase/database';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 
 const userSlice = createSlice({
@@ -26,7 +26,7 @@ const userSlice = createSlice({
 });
 
 export const { setUserData, setUsers, setAuth } = userSlice.actions;
-export const selectUsers = (state) => state.user.users
+export const selectUsers = (state) => state.user.users;
 
 /**
  * Asynchronous action to fetch user data.
@@ -60,7 +60,7 @@ export const fetchAllUsers = () => async (dispatch) => {
         const usersObject = snapshot.val();
         const usersData = Object.entries(usersObject).map(([uid, user]) => ({
             uid,
-            ...user.userInfo
+            ...user.userInfo,
         }));
         dispatch(setUsers(usersData));
     }

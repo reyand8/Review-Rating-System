@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles"; // Исправленный импорт
+import { createTheme } from '@mui/material/styles'; // Исправленный импорт
 
 const theme = createTheme({
     breakpoints: {
@@ -19,7 +19,7 @@ const theme = createTheme({
             light: '#d4bcf3',
             contrastText: '#ffffff',
             messageText: '#969595',
-            reviewBg: '#cecbcb'
+            reviewBg: '#cecbcb',
         },
         secondary: {
             main: '#9c27b0',

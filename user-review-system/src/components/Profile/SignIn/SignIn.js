@@ -52,7 +52,7 @@ const SignIn = ({formState, setFormState, handlerChange, setLogin, setAuth}) => 
             const auth = getAuth();
             try {
                 await signInWithEmailAndPassword(auth, formState.email, formState.password);
-                setAuth(true)
+                setAuth(true);
                 setFormState({username: '', email: '', password: ''});
             } catch (error) {
                 handleFirebaseError(error);

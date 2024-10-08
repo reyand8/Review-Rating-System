@@ -1,9 +1,9 @@
 import {Route, Routes} from 'react-router-dom';
 
 import {ROUTES} from '../utils/routes';
-import NotFound from "../components/Status/NotFound";
-import Profile from "../components/Profile/Profile";
-import Home from "../components/Home/Home";
+import NotFound from '../components/Status/NotFound';
+import Profile from '../components/Profile/Profile';
+import Home from '../components/Home/Home';
 
 
 const AppRoutes = () => (

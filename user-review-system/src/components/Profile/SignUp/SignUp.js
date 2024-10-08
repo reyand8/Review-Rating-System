@@ -56,7 +56,7 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
             email: email,
             role: role,
             reviews: {},
-            rating: []
+            rating: [],
         }).catch((error) => {
             console.error('Error writing user info to database:', error);
         });
@@ -80,7 +80,7 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
                     username: '',
                     email: '',
                     password: '',
-                    role: 'user'
+                    role: 'user',
                 });
             } catch (error) {
                 handleFirebaseError(error);

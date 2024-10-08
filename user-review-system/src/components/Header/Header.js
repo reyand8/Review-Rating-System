@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import {AppBar, Box, Button, Toolbar} from "@mui/material";
+import {AppBar, Box, Button, Toolbar} from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import {styled} from "@mui/material/styles";
+import {styled} from '@mui/material/styles';
 
 import homeImage from '../../assets/img/home_icon.png';
 
@@ -23,7 +23,7 @@ const Header = () => {
             <>
                 <Box sx={{ flexGrow:1 }}>
                     <AppBar position="static">
-                        <Toolbar sx={{display:"flex", justifyContent: "space-between"}}>
+                        <Toolbar sx={{display:'flex', justifyContent: 'space-between'}}>
                             <RouterLink component={RouterLink} to="/" sx={{ flexGrow: 1 }}>
                                 <StyledHomeImg src={homeImage}/>
                             </RouterLink>
@@ -40,6 +40,6 @@ const Header = () => {
                 </Box>
             </>
         );
-}
+};
 
 export default Header;

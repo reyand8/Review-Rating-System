@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import { Star } from "@mui/icons-material";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import { Star } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchReviews, submitReview, deleteReview } from '../../features/reviewSlice/reviewSlice';
 import { fetchUserData } from '../../features/userSlice/userSlice';
 import { auth } from '../../firebase/firebase';
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 
 const PaperWarning = styled(Paper)(({ theme }) => ({
     width: '820px',
