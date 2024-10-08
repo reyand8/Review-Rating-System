@@ -43,7 +43,7 @@ const { setUserData, setUsers, setAuth } = userSlice.actions;
 const userReducer = userSlice.reducer;
 
 
-const { fetchUserData, fetchAllUsers, authListener } = require('./userSlice'); // Убедитесь, что путь правильный
+const { fetchUserData, fetchAllUsers, authListener } = require('./userSlice');
 
 describe('userSlice', () => {
     let initialState;
