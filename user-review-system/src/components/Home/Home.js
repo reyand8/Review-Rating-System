@@ -18,11 +18,9 @@ const Home = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (setSelectedUserId) {
-            const user = users.find(user => user.uid === setSelectedUserId);
-            if (user) {
-                setCurrUserRole(user.role);
-            }
+        const currentUser = users.find(user => user.uid === userId);
+        if (currentUser) {
+            setCurrUserRole(currentUser.role);
         }
     }, [userId, users]);
 

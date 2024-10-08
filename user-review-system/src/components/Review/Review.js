@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchReviews, submitReview, deleteReview } from '../../features/reviewSlice/reviewSlice';
 import { fetchUserData } from '../../features/userSlice/userSlice';
 import { auth } from '../../firebase/firebase';
+import {useNavigate} from "react-router-dom";
 
 const PaperWarning = styled(Paper)(({ theme }) => ({
     width: '820px',
@@ -38,15 +39,21 @@ const ReviewBox = styled(Box)(({ theme }) => ({
 
 const Review = ({ currUser, selectedUserId }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { reviews } = useSelector(state => state.reviews);
-    const userInfo = useSelector(state => state.user.userData); // Получите информацию о пользователе из Redux
+    const userInfo = useSelector(state => state.user.userData);
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(0);
     const [canSubmit, setCanSubmit] = useState(false);
     const [existingReview, setExistingReview] = useState(null);
 
     const checkExistingReview = () => {
-        const currentUserId = auth.currentUser.uid;
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+            navigate('/profile');
+            return;
+        }
+        const currentUserId = currentUser.uid;
         const review = reviews.find(r => r.userId === currentUserId);
         setExistingReview(review);
         if (review) {
