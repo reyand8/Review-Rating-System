@@ -47,6 +47,9 @@ const Review = ({ currUser, selectedUserId }) => {
     const [canSubmit, setCanSubmit] = useState(false);
     const [existingReview, setExistingReview] = useState(null);
 
+    /**
+     * Checks for an existing review.
+     */
     const checkExistingReview = () => {
         const currentUser = auth.currentUser;
         if (!currentUser) {
@@ -62,6 +65,12 @@ const Review = ({ currUser, selectedUserId }) => {
         }
     };
 
+    /**
+     * Calculates the average rating.
+     *
+     * @param {Array} reviews - The list of reviews to calculate the average rating.
+     * @returns {number} The average rating.
+     */
     const calculateAverageRating = (reviews) => {
         if (reviews.length === 0) return 0;
         const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
@@ -81,6 +90,9 @@ const Review = ({ currUser, selectedUserId }) => {
         setCanSubmit(reviewText.trim().length > 0);
     }, [reviewText]);
 
+    /**
+     * Handles the submission of a new review.
+     */
     const handleSubmitReview = async () => {
         const currentUserId = auth.currentUser.uid;
         const review = {
@@ -100,12 +112,20 @@ const Review = ({ currUser, selectedUserId }) => {
         setRating(0);
     };
 
+    /**
+     * Delete review.
+     *
+     * @param {string} reviewId - The ID of the review to delete.
+     */
     const handleDeleteReview = async (reviewId) => {
         await dispatch(deleteReview({ userId: selectedUserId, reviewId }));
         setReviewText('');
         setRating(0);
     };
 
+    /**
+     * Renders stars based on the given rating.
+     */
     const renderStars = (rating) => {
         const stars = [];
         for (let i = 1; i <= 5; i++) {
@@ -170,8 +190,8 @@ const Review = ({ currUser, selectedUserId }) => {
                     <Box sx={{ mt: 4 }}>
                         <Typography variant="h6">Reviews:</Typography>
                         {reviews.length > 0 ? (
-                            reviews.map((review) => (
-                                <ReviewBox key={review.uid}>
+                            reviews.map((review, index) => (
+                                <ReviewBox key={index}>
                                     <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
                                         {review.username}
                                     </Typography>

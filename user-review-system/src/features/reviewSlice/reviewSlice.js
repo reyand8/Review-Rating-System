@@ -7,6 +7,14 @@ const initialState = {
     error: null,
 };
 
+/**
+ * Asynchronous operation to fetch user reviews.
+ *
+ * @async
+ * @function
+ * @param {string} userId - The ID of the user.
+ * @returns {Promise<Array>} Return an array of reviews if they exist, or an empty array.
+ */
 export const fetchReviews =
     createAsyncThunk('reviews/fetchReviews', async (userId) => {
     const db = getDatabase();
@@ -23,6 +31,14 @@ export const fetchReviews =
     }
 });
 
+/**
+ * Asynchronous operation to submit a review.
+ *
+ * @async
+ * @function
+ * @param {{ userId: string, review: Object }} payload - Contains userId and the review.
+ * @returns {Promise<Object>}
+ */
 export const submitReview =
     createAsyncThunk('reviews/submitReview', async ({ userId, review }) => {
     const db = getDatabase();
@@ -30,6 +46,15 @@ export const submitReview =
     await set(reviewsRef, review);
     return review;
 });
+
+/**
+ * Asynchronous operation to delete a review.
+ *
+ * @async
+ * @function
+ * @param {{ userId: string, reviewId: string }} payload - An object containing userId and the ID.
+ * @returns {Promise<string>} The ID of the deleted review.
+ */
 
 export const deleteReview =
     createAsyncThunk('reviews/deleteReview', async ({ userId, reviewId }) => {

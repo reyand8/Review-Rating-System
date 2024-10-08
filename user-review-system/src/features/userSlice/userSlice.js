@@ -28,6 +28,14 @@ const userSlice = createSlice({
 export const { setUserData, setUsers, setAuth } = userSlice.actions;
 export const selectUsers = (state) => state.user.users
 
+/**
+ * Asynchronous action to fetch user data.
+ *
+ * @async
+ * @function
+ * @param {string} uid - The ID of the user.
+ * @returns {Promise<void>}
+ */
 export const fetchUserData = (uid) => async (dispatch) => {
     const db = getDatabase();
     const userRef = ref(db, `user/${uid}/userInfo`);
@@ -37,6 +45,13 @@ export const fetchUserData = (uid) => async (dispatch) => {
     }
 };
 
+/**
+ * Asynchronous action to fetch all users.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
 export const fetchAllUsers = () => async (dispatch) => {
     const db = getDatabase();
     const usersRef = ref(db, 'user/');
@@ -51,6 +66,12 @@ export const fetchAllUsers = () => async (dispatch) => {
     }
 };
 
+/**
+ * Sets up an authentication listener that dispatches actions based on the user's authentication state.
+ *
+ * @function
+ * @returns {Function}
+ */
 export const authListener = () => (dispatch) => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
