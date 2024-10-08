@@ -3,7 +3,6 @@ import Paper from '@mui/material/Paper';
 import {styled} from '@mui/material/styles';
 import WarningIcon from '@mui/icons-material/Warning';
 
-import theme from '../../assets/theme';
 
 const PaperWarning = styled(Paper)(({ theme }) => ({
     width: '820px',
@@ -11,25 +10,32 @@ const PaperWarning = styled(Paper)(({ theme }) => ({
     justifyContent: 'center',
     margin: 'auto',
     flexDirection: 'column',
-    alignContent: 'center',
     alignItems: 'center',
 }));
 
 const HeaderText = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.messageText,
     fontWeight: 'bold',
+    textAlign: 'center',
 }));
 
 const MainText = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.messageText,
-    marginBottom: '26px'
+    marginBottom: '26px',
+    textAlign: 'center',
+}));
+
+const StyledWarningIcon = styled(WarningIcon)(({ theme }) => ({
+    fontSize: 60,
+    marginTop: '20px',
+    fill: theme.palette.warning.messageWarning,
 }));
 
 const EmptySection = () => {
     return (
         <Box sx={{ flexGrow: 1}}>
             <PaperWarning>
-                <WarningIcon sx={{fontSize: 60, my: 7, fill: theme.palette.warning.messageWarning}}  />
+                <StyledWarningIcon />
                 <HeaderText>
                     This section is empty
                 </HeaderText>
