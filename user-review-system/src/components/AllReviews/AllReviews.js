@@ -39,9 +39,9 @@ const AllReviews = ({ setSelectedUserId }) => {
     return (
         <UserListSection>
             <UserList spacing={2}>
-                {users.map(user => (
+                {users.map((user, index) => (
                     <Paper
-                        key={user.uid}
+                        key={index}
                         sx={{ padding: 2, width: '320px', cursor: 'pointer' }}
                         onClick={() => handleUserClick(user.uid)}
                     >
