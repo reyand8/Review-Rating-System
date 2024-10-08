@@ -1,16 +1,24 @@
-import {Box, Typography} from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import {styled} from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import WarningIcon from '@mui/icons-material/Warning';
 
-
 const PaperWarning = styled(Paper)(({ theme }) => ({
-    width: '820px',
+    width: '800px',
     display: 'flex',
     justifyContent: 'center',
     margin: 'auto',
     flexDirection: 'column',
     alignItems: 'center',
+    [theme.breakpoints.down('md')]: {
+        width: '600px',
+    },
+    [theme.breakpoints.down('sm')]: {
+        width: '400px',
+    },
+    [theme.breakpoints.down('xs')]: {
+        width: '200px',
+    },
 }));
 
 const HeaderText = styled(Typography)(({ theme }) => ({
@@ -33,7 +41,7 @@ const StyledWarningIcon = styled(WarningIcon)(({ theme }) => ({
 
 const EmptySection = () => {
     return (
-        <Box sx={{ flexGrow: 1}}>
+        <Box sx={{ flexGrow: 1 }}>
             <PaperWarning>
                 <StyledWarningIcon />
                 <HeaderText>
