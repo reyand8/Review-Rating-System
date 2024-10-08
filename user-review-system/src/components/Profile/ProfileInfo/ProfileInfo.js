@@ -11,8 +11,6 @@ import defaultImage from '../../../assets/img/default_img.png';
 import theme from '../../../assets/theme';
 import { auth } from '../../../firebase/firebase';
 
-const profileStyle = { padding: 20, minHeight: '58vh', maxWidth: 660, margin: '60px auto' };
-
 
 const ProfileInfo = ({data}) => {
     const navigate = useNavigate();
@@ -24,10 +22,18 @@ const ProfileInfo = ({data}) => {
 
     return (
         <>
-
-            <Paper elevation={10} style={profileStyle}>
+            <Paper elevation={10} sx={{
+                padding: 3,
+                minHeight: '58vh',
+                maxWidth: 660,
+                margin: '60px auto',
+            }}>
                 <Grid2 align="center">
-                    <Typography sx={{fontSize: theme.typography.h2.fontSize, fontWeight: 'bold', mb: 4}}>
+                    <Typography sx={{
+                        fontSize: theme.typography.h2.fontSize,
+                        fontWeight: 'bold',
+                        mb: 4}}
+                    >
                        Profile
                     </Typography>
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -37,7 +43,8 @@ const ProfileInfo = ({data}) => {
                                 <Accordion sx={{ maxWidth: '440px', marginTop: '50px' }}>
                                     <AccordionDetails sx={{ height: '240px' }}>
                                         <Box component="form"
-                                            sx={{ display: 'flex',
+                                            sx={{
+                                                display: 'flex',
                                                 flexDirection: 'column',
                                                 justifyContent: 'space-between',
                                                 height: '150px' }}>
@@ -68,7 +75,6 @@ const ProfileInfo = ({data}) => {
                                 </Typography>
                             </Button>
                         </Link>
-
                     </Box>
                 </Grid2>
             </Paper>
@@ -76,4 +82,4 @@ const ProfileInfo = ({data}) => {
     );
 };
 
-export default ProfileInfo;
+export default React.memo(ProfileInfo);
