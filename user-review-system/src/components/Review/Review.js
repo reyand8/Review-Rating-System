@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import { Star } from "@mui/icons-material";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchReviews, submitReview, deleteReview } from '../../features/reviewSlice/reviewSlice';
-import { getDatabase, ref, get } from "firebase/database";
+import { fetchUserData } from '../../features/userSlice/userSlice';
 import { auth } from '../../firebase/firebase';
 
 const PaperWarning = styled(Paper)(({ theme }) => ({
@@ -39,21 +39,11 @@ const ReviewBox = styled(Box)(({ theme }) => ({
 const Review = ({ currUser, selectedUserId }) => {
     const dispatch = useDispatch();
     const { reviews } = useSelector(state => state.reviews);
+    const userInfo = useSelector(state => state.user.userData); // Получите информацию о пользователе из Redux
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(0);
-    const [userInfo, setUserInfo] = useState(null);
     const [canSubmit, setCanSubmit] = useState(false);
     const [existingReview, setExistingReview] = useState(null);
-
-    const fetchUserInfo = async () => {
-        const db = getDatabase();
-        const userRef = ref(db, `user/${selectedUserId}`);
-        const snapshot = await get(userRef);
-        if (snapshot.exists()) {
-            const usersObject = snapshot.val();
-            setUserInfo(usersObject.userInfo);
-        }
-    };
 
     const checkExistingReview = () => {
         const currentUserId = auth.currentUser.uid;
@@ -73,7 +63,7 @@ const Review = ({ currUser, selectedUserId }) => {
 
     useEffect(() => {
         dispatch(fetchReviews(selectedUserId));
-        fetchUserInfo();
+        dispatch(fetchUserData(selectedUserId));
     }, [dispatch, selectedUserId]);
 
     useEffect(() => {
@@ -101,14 +91,12 @@ const Review = ({ currUser, selectedUserId }) => {
         await dispatch(submitReview({ userId: selectedUserId, review }));
         setReviewText('');
         setRating(0);
-        fetchUserInfo();
     };
 
     const handleDeleteReview = async (reviewId) => {
         await dispatch(deleteReview({ userId: selectedUserId, reviewId }));
         setReviewText('');
         setRating(0);
-        fetchUserInfo();
     };
 
     const renderStars = (rating) => {
