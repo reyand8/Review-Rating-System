@@ -4,7 +4,6 @@ import {AppBar, Box, Button, Toolbar} from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {styled} from "@mui/material/styles";
 
-import theme from '../../assets/theme';
 import homeImage from '../../assets/img/home_icon.png';
 
 const StyledHomeImg = styled('img')({
