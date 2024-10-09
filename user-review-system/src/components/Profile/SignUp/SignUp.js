@@ -26,6 +26,7 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
     const [errors, setErrors] = useState({
         username: '', email: '', password: '', role: 'admin'});
     const [firebaseError, setFirebaseError] = useState('');
+    const { email, username, role, password } = formState;
 
     const handleFirebaseError = (error) => {
         const errorCode = error.code;
@@ -71,10 +72,10 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
             const auth = getAuth();
             try {
                 const userCredential =
-                    await createUserWithEmailAndPassword(auth, formState.email, formState.password);
+                    await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
-                const role = formState.role || 'user';
-                saveUserInfo(user.uid, formState.username, formState.email, role);
+                const role = role || 'user';
+                saveUserInfo(user.uid, username, email, role);
                 setLogin(true);
                 setFormState({
                     username: '',
@@ -98,7 +99,7 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
                     variant="outlined"
                     fullWidth
                     required
-                    value={formState.username}
+                    value={username}
                     inputProps={{
                         pattern: '[A-Za-z]+',
                     }}
@@ -114,7 +115,7 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
                     variant="outlined"
                     fullWidth
                     required
-                    value={formState.email}
+                    value={email}
                     onChange={handlerChange}
                     error={!!errors.email}
                     helperText={errors.email}
@@ -127,13 +128,12 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
                     variant="outlined"
                     fullWidth
                     required
-                    value={formState.password}
+                    value={password}
                     onChange={handlerChange}
                     error={!!errors.password}
                     helperText={errors.password}
                 />
                 <Button
-                    sx={{ mb: '8px' }}
                     type="submit"
                     color="primary"
                     name="Sign Up"

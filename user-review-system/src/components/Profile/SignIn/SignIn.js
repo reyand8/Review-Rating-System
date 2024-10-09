@@ -27,6 +27,7 @@ const TextFieldBox = styled(Box)(({ theme }) => ({
 const SignIn = ({formState, setFormState, handlerChange, setLogin, setAuth}) => {
     const [errors, setErrors] = useState({ email: '', password: '' });
     const [firebaseError, setFirebaseError] = useState('');
+    const { email, password } = formState;
 
     const handleFirebaseError = (error) => {
         const errorCode = error.code;
@@ -51,7 +52,7 @@ const SignIn = ({formState, setFormState, handlerChange, setLogin, setAuth}) => 
         if (isValid(formValidation)) {
             const auth = getAuth();
             try {
-                await signInWithEmailAndPassword(auth, formState.email, formState.password);
+                await signInWithEmailAndPassword(auth, email, password);
                 setAuth(true);
                 setFormState({username: '', email: '', password: ''});
             } catch (error) {
@@ -71,7 +72,7 @@ const SignIn = ({formState, setFormState, handlerChange, setLogin, setAuth}) => 
                     variant="outlined"
                     name="email"
                     fullWidth required
-                    value={formState.email}
+                    value={email}
                     onChange={handlerChange}
                     error={!!errors.email}
                     helperText={errors.email}
@@ -83,7 +84,7 @@ const SignIn = ({formState, setFormState, handlerChange, setLogin, setAuth}) => 
                     variant="outlined"
                     name="password"
                     fullWidth required
-                    value={formState.password}
+                    value={password}
                     onChange={handlerChange}
                     error={!!errors.password}
                     helperText={errors.password}

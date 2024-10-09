@@ -186,26 +186,25 @@ const Review = ({ currUser, selectedUserId }) => {
                             Send
                         </Button>
                     </Box>
-
                     <Box sx={{ mt: 4 }}>
                         <Typography variant="h6">Reviews:</Typography>
                         {reviews.length > 0 ? (
-                            reviews.map((review, index) => (
+                            reviews.map(({ username, text, rating, uid }, index) => (
                                 <ReviewBox key={index}>
                                     <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-                                        {review.username}
+                                        {username}
                                     </Typography>
                                     <Typography variant="body2" sx={{ my: 2 }}>
-                                        {review.text}
+                                        {text}
                                     </Typography>
                                     <Box sx={{ display: 'flex', mt: 1 }}>
-                                        {renderStars(review.rating)}
+                                        {renderStars(rating)}
                                     </Box>
                                     {currUser === 'admin' && (
                                         <Button
                                             variant="contained"
                                             color="secondary"
-                                            onClick={() => handleDeleteReview(review.uid)}
+                                            onClick={() => handleDeleteReview(uid)}
                                             sx={{ mt: 2 }}
                                         >
                                             Delete Review

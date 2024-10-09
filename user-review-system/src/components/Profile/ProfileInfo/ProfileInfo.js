@@ -14,6 +14,7 @@ import { auth } from '../../../firebase/firebase';
 
 const ProfileInfo = ({data}) => {
     const navigate = useNavigate();
+    const {username, email} = data;
 
     const onLogOutClick = () => {
         auth.signOut();
@@ -50,14 +51,14 @@ const ProfileInfo = ({data}) => {
                                                 height: '150px' }}>
                                             <TextField
                                                 name="email"
-                                                value={data.email}
+                                                value={email}
                                                 variant="standard"
                                                 disabled
                                                 sx={{ mx: '20px', mt: '30px' }}
                                             />
                                             <TextField
                                                 name="username"
-                                                value={data.username}
+                                                value={username}
                                                 variant="standard"
                                                 disabled
                                                 sx={{ mx: '20px' }}
