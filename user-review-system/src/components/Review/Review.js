@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
+import {useNavigate} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { Star } from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { fetchReviews, submitReview, deleteReview } from '../../features/reviewSlice/reviewSlice';
 import { fetchUserData } from '../../features/userSlice/userSlice';
 import { auth } from '../../firebase/firebase';
-import {useNavigate} from 'react-router-dom';
 
 const PaperWarning = styled(Paper)(({ theme }) => ({
-    width: '820px',
+    maxWidth: '820px',
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
     margin: 'auto',
@@ -18,13 +20,20 @@ const PaperWarning = styled(Paper)(({ theme }) => ({
     alignContent: 'center',
     alignItems: 'center',
     [theme.breakpoints.down('md')]: {
-        width: '600px',
+        width: '580px',
     },
     [theme.breakpoints.down('sm')]: {
-        width: '400px',
+        width: '353px',
+        padding: '10px',
     },
-    [theme.breakpoints.down('xs')]: {
-        width: '200px',
+}));
+
+const MainBox = styled(Box)(({ theme }) => ({
+    [theme.breakpoints.down('sm')]: {
+        maxWidth: '368px',
+        width: '100%',
+        marginX: 'auto',
+        padding: theme.spacing(2),
     },
 }));
 
@@ -139,7 +148,7 @@ const Review = ({ currUser, selectedUserId }) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <PaperWarning>
-                <Box sx={{ padding: 2 }}>
+                <MainBox sx={{mx: '190px', padding: '12px'}}>
                     {userInfo && (
                         <>
                             <Typography>Name: {userInfo.username}</Typography>
@@ -216,7 +225,7 @@ const Review = ({ currUser, selectedUserId }) => {
                             <Typography variant="body2">No reviews yet.</Typography>
                         )}
                     </Box>
-                </Box>
+                </MainBox>
             </PaperWarning>
         </Box>
     );
