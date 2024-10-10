@@ -22,6 +22,7 @@ const Profile = () => {
     const [login, setLogin] = useState(false);
     const [formState, setFormState] = useState({
         username: '',
+        role: '',
         email: '',
         password: '',
     });
