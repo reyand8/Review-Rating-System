@@ -1,6 +1,5 @@
 {
   "name": "user-review-system",
-  "homepage": "https://reyand8.github.io/Review-Rating-System/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -31,7 +30,8 @@
     "lint:fix": "npm run lint -- --fix",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "docs": "jsdoc src -d docs"
   },
   "eslintConfig": {
     "extends": [
@@ -58,9 +58,11 @@
     "@reduxjs/toolkit": "^2.2.8",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
+    "@types/jest": "^29.5.13",
     "firebase-mock": "^2.3.2",
     "gh-pages": "^6.1.1",
     "jest": "^27.5.1",
+    "jsdoc": "^4.0.3",
     "redux-mock-store": "^1.5.4"
   }
 }
