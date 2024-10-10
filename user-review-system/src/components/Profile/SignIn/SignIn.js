@@ -49,7 +49,6 @@ const SignIn = ({formState, setFormState, handlerChange, setLogin}) => {
      */
     const handleFirebaseError = (error) => {
         const errorCode = error.code;
-        console.log(error);
         switch (errorCode) {
             case 'auth/wrong-password':
                 setFirebaseError('Invalid email or password');
