@@ -14,10 +14,7 @@ const PaperWarning = styled(Paper)(({ theme }) => ({
         width: '600px',
     },
     [theme.breakpoints.down('sm')]: {
-        width: '400px',
-    },
-    [theme.breakpoints.down('xs')]: {
-        width: '200px',
+        width: '300px',
     },
 }));
 
