@@ -5,8 +5,9 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { getDatabase, ref, set } from 'firebase/database';
 import { validateSignUp, isValid } from '../../../utils/validation';
+import { saveUserInfo } from '../../../features/userSlice/userSlice';
+import {useDispatch} from 'react-redux';
 
 
 const TextFieldBox = styled(Box)(({ theme }) => ({
@@ -22,12 +23,29 @@ const TextFieldBox = styled(Box)(({ theme }) => ({
     },
 }));
 
+/**
+ * SignUp component for the registration.
+ *
+ * @param {Object} props - Component properties.
+ * @param {Object} props.formState - Current state of the form.
+ * @param {Function} props.setFormState - Function to set the form state.
+ * @param {Function} props.handlerChange - Function to handle input changes.
+ * @param {Function} props.setLogin - Function to set the login state.
+ * @returns {JSX.Element} The rendered SignUp component.
+ */
+
 const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
     const [errors, setErrors] = useState({
         username: '', email: '', password: '', role: 'admin'});
     const [firebaseError, setFirebaseError] = useState('');
     const { email, username, role, password } = formState;
+    const dispatch = useDispatch();
 
+    /**
+     * Handles Firebase auth errors.
+     *
+     * @param {Object} error - The error object from the Firebase.
+     */
     const handleFirebaseError = (error) => {
         const errorCode = error.code;
         switch (errorCode) {
@@ -49,20 +67,6 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
         }
     };
 
-    const saveUserInfo = (uid, username, email, role) => {
-        const db = getDatabase();
-        const userRef = ref(db, `user/${uid}/userInfo`);
-        set(userRef, {
-            username: username,
-            email: email,
-            role: role,
-            reviews: {},
-            rating: [],
-        }).catch((error) => {
-            console.error('Error writing user info to database:', error);
-        });
-    };
-
     const onSubmit = async (e) => {
         e.preventDefault();
         const formValidation = validateSignUp(formState);
@@ -74,8 +78,7 @@ const SignUp = ({formState, setFormState, handlerChange, setLogin}) => {
                 const userCredential =
                     await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
-                const role = role || 'user';
-                saveUserInfo(user.uid, username, email, role);
+                dispatch(saveUserInfo(user.uid, username, email, role));
                 setLogin(true);
                 setFormState({
                     username: '',
