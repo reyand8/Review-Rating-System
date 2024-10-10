@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getDatabase, ref, get } from 'firebase/database';
+import {getDatabase, ref, get, set} from 'firebase/database';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 
@@ -27,6 +27,29 @@ const userSlice = createSlice({
 
 export const { setUserData, setUsers, setAuth } = userSlice.actions;
 export const selectUsers = (state) => state.user.users;
+
+/**
+ * Saves user info to the Firebase.
+ *
+ * @param {string} uid - User ID from Firebase.
+ * @param {string} username - The user's username.
+ * @param {string} email - The user's email.
+ * @param {string} role - The user's role (e.g., admin, user).
+ */
+
+export const saveUserInfo = (uid, username, email, role) => async (dispatch) => {
+    const db = getDatabase();
+    const userRef = ref(db, `user/${uid}/userInfo`);
+    await set(userRef, {
+        username,
+        email,
+        role,
+        reviews: {},
+        rating: [],
+    }).catch((error) => {
+        console.error('Error adding user info to the database:', error);
+    });
+};
 
 /**
  * Asynchronous action to fetch user data.
