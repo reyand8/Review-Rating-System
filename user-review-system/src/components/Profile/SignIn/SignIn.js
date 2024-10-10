@@ -8,6 +8,8 @@ import {styled} from '@mui/material/styles';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import {validateSignIn, isValid} from '../../../utils/validation';
+import {setAuth} from '../../../features/userSlice/userSlice';
+import {useDispatch} from 'react-redux';
 
 
 const TextFieldBox = styled(Box)(({ theme }) => ({
@@ -23,14 +25,31 @@ const TextFieldBox = styled(Box)(({ theme }) => ({
     },
 }));
 
-
-const SignIn = ({formState, setFormState, handlerChange, setLogin, setAuth}) => {
+/**
+ * SignIn component for the authentication.
+ *
+ * @param {Object} props - Component properties.
+ * @param {Object} props.formState - Current state of the form.
+ * @param {Function} props.setFormState - Function to set the form state.
+ * @param {Function} props.handlerChange - Function to handle input changes.
+ * @param {Function} props.setLogin - Function to set the login state.
+ *
+ * @returns {JSX.Element} The rendered SignIn component.
+ */
+const SignIn = ({formState, setFormState, handlerChange, setLogin}) => {
     const [errors, setErrors] = useState({ email: '', password: '' });
     const [firebaseError, setFirebaseError] = useState('');
     const { email, password } = formState;
+    const dispatch = useDispatch();
 
+    /**
+     * Handles Firebase auth errors.
+     *
+     * @param {Object} error - The error object from the Firebase.
+     */
     const handleFirebaseError = (error) => {
         const errorCode = error.code;
+        console.log(error);
         switch (errorCode) {
             case 'auth/wrong-password':
                 setFirebaseError('Invalid email or password');
@@ -53,8 +72,8 @@ const SignIn = ({formState, setFormState, handlerChange, setLogin, setAuth}) => 
             const auth = getAuth();
             try {
                 await signInWithEmailAndPassword(auth, email, password);
-                setAuth(true);
-                setFormState({username: '', email: '', password: ''});
+                dispatch(setAuth({ isAuthenticated: true, userId: email }));
+                setFormState({ username: '', email: '', password: '' });
             } catch (error) {
                 handleFirebaseError(error);
             }
