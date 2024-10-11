@@ -35,6 +35,8 @@ ____
 - Install dependencies: npm install
     - Run the project: npm run start
     - Open a browser and navigate to: http://localhost:3000
-  
+
+**Note: Only admin can delete reviews.**
 ____
 
+![main.png](readmeScr/main.png)
