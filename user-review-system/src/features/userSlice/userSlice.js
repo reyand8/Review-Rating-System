@@ -2,32 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import {getDatabase, ref, get, set} from 'firebase/database';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-
-const userSlice = createSlice({
-    name: 'user',
-    initialState: {
-        userData: null,
-        users: [],
-        isAuthenticated: false,
-        userId: null,
-    },
-    reducers: {
-        setUserData: (state, action) => {
-            state.userData = action.payload;
-        },
-        setUsers: (state, action) => {
-            state.users = action.payload;
-        },
-        setAuth: (state, action) => {
-            state.isAuthenticated = action.payload.isAuthenticated;
-            state.userId = action.payload.userId;
-        },
-    },
-});
-
-export const { setUserData, setUsers, setAuth } = userSlice.actions;
-export const selectUsers = (state) => state.user.users;
-
 /**
  * Saves user info to the Firebase.
  *
@@ -40,15 +14,18 @@ export const selectUsers = (state) => state.user.users;
 export const saveUserInfo = (uid, username, email, role) => async (dispatch) => {
     const db = getDatabase();
     const userRef = ref(db, `user/${uid}/userInfo`);
-    await set(userRef, {
-        username,
-        email,
-        role,
-        reviews: {},
-        rating: [],
-    }).catch((error) => {
+    try {
+        await set(userRef, {
+            username,
+            email,
+            role,
+            reviews: {},
+            rating: [],
+        });
+        dispatch(updateUserData({ username, email, role }));
+    } catch (error) {
         console.error('Error adding user info to the database:', error);
-    });
+    }
 };
 
 /**
@@ -107,5 +84,38 @@ export const authListener = () => (dispatch) => {
         }
     });
 };
+
+export const selectUsers = (state) => state.user.users;
+
+const userSlice = createSlice({
+    name: 'user',
+    initialState: {
+        userData: null,
+        users: [],
+        isAuthenticated: false,
+        userId: null,
+    },
+    reducers: {
+        setUserData: (state, action) => {
+            state.userData = action.payload;
+        },
+        setUsers: (state, action) => {
+            state.users = action.payload;
+        },
+        setAuth: (state, action) => {
+            state.isAuthenticated = action.payload.isAuthenticated;
+            state.userId = action.payload.userId;
+        },
+        updateUserData: (state, action) => {
+            state.userData = {
+                ...state.userData,
+                ...action.payload,
+            };
+        },
+    },
+});
+
+export const { setUserData, setUsers,
+    setAuth, updateUserData } = userSlice.actions;
 
 export default userSlice.reducer;

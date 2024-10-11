@@ -22,11 +22,11 @@ const Profile = () => {
     const [login, setLogin] = useState(false);
     const [formState, setFormState] = useState({
         username: '',
-        role: '',
+        role: 'user',
         email: '',
         password: '',
     });
-
+    console.log(isAuthenticated, userData);
     const handlerChange = (e) => {
         setFormState({
             ...formState,
