@@ -1,12 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getDatabase, ref, get, set } from 'firebase/database';
 
-const initialState = {
-    reviews: [],
-    loading: false,
-    error: null,
-};
-
 /**
  * Asynchronous operation to fetch user reviews.
  *
@@ -55,7 +49,6 @@ export const submitReview =
  * @param {{ userId: string, reviewId: string }} payload - An object containing userId and the ID.
  * @returns {Promise<string>} The ID of the deleted review.
  */
-
 export const deleteReview =
     createAsyncThunk('reviews/deleteReview', async ({ userId, reviewId }) => {
     const db = getDatabase();
@@ -66,7 +59,11 @@ export const deleteReview =
 
 const reviewSlice = createSlice({
     name: 'reviews',
-    initialState,
+    initialState: {
+        reviews: [],
+        loading: false,
+        error: null,
+    },
 
     extraReducers: (builder) => {
         builder

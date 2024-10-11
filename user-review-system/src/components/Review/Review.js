@@ -53,7 +53,6 @@ const Review = ({ currUser, selectedUserId }) => {
     const userInfo = useSelector(state => state.user.userData);
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(0);
-    const [canSubmit, setCanSubmit] = useState(false);
     const [existingReview, setExistingReview] = useState(null);
 
     /**
@@ -95,18 +94,14 @@ const Review = ({ currUser, selectedUserId }) => {
         checkExistingReview();
     }, [reviews]);
 
-    useEffect(() => {
-        setCanSubmit(reviewText.trim().length > 0);
-    }, [reviewText]);
-
     /**
      * Handles the submission of a new review.
      */
     const handleSubmitReview = async () => {
-        const currentUserId = auth.currentUser.uid;
+        const currentUser = auth.currentUser;
         const review = {
-            userId: currentUserId,
-            username: userInfo.username,
+            userId: currentUser.uid,
+            username: currentUser.email,
             text: reviewText,
             rating: rating,
             createdAt: new Date().toISOString(),
@@ -191,7 +186,7 @@ const Review = ({ currUser, selectedUserId }) => {
                             onClick={handleSubmitReview}
                             variant="contained"
                             sx={{ mt: 2 }}
-                            disabled={!canSubmit}>
+                            disabled={!reviewText}>
                             Send
                         </Button>
                     </Box>
